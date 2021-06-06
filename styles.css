@@ -1,0 +1,53 @@
+body {
+    background-color: #EEE;
+    font-family: 'Lucida Console';
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    width: 50em;
+    margin: 1em auto auto auto;
+    border-radius: 1em;
+    height: 50em;
+    align-items: center;
+}
+
+.main-title {
+    text-align: center;
+    font-size: 40px;
+    padding: 20px 10px;
+}
+
+.description {
+    padding: 0 10% 10px;
+    text-align: center;
+}
+
+.hint {
+    text-align: center;
+    color: #BBB;
+    padding-bottom: 5px;
+}
+
+.inputs {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.range-input {
+    margin: 5px 30px;
+    padding: 5px 10px;
+    outline: none;
+    border: 1px solid gray;
+    border-radius: 4px;
+}
+
+.range-submit {
+    font-family: 'Lucida Console';
+    padding: 5px 10px;
+    width: 30%;
+    margin: 10px;
+}
