@@ -87,10 +87,21 @@ function calculateResistance(){
     }
 
     const ShowLong = document.getElementById('long-display').checked;
-    const resistors = valid.map( set => 
-        `<div class="resistor-row">${set[0]+onek}x 1kΩ<span class="optional${ShowLong?"":" hidden"}">&nbsp;Resistors</span>, `+
-        `${set[1]+fivek}x 5.1kΩ<span class="optional${ShowLong?"":" hidden"}">&nbsp;Resistors</span>, `+
-        `and ${set[2]+tenk}x 10kΩ<span class="optional${ShowLong?"":" hidden"}">&nbsp;Resistors</span>.</div>`
+    const resistors = valid.map( set => {
+        var inSeries = "";
+        if(onek || fivek || tenk){
+            inSeries = `<div class="series">In series:&nbsp;&nbsp;&nbsp;${onek}x 1kΩ<span class="optional${ShowLong?"":" hidden"}">&nbsp;Resistors</span>, `+
+            `${fivek}x 5.1kΩ<span class="optional${ShowLong?"":" hidden"}">&nbsp;Resistors</span>, `+
+            `and ${tenk}x 10kΩ<span class="optional${ShowLong?"":" hidden"}">&nbsp;Resistors</span>.</div>`
+        }
+        var inParallel = "";
+        if(set[0] || set[1] || set[2]){
+            inParallel = `<div class="parallel">In parallel: ${set[0]}x 1kΩ<span class="optional${ShowLong?"":" hidden"}">&nbsp;Resistors</span>, `+
+            `${set[1]}x 5.1kΩ<span class="optional${ShowLong?"":" hidden"}">&nbsp;Resistors</span>, `+
+            `and ${set[2]}x 10kΩ<span class="optional${ShowLong?"":" hidden"}">&nbsp;Resistors</span>.</div>`
+        }
+        return `<div class="resistor-row">${inSeries}${inParallel}</div>`
+    }
     );
     document.getElementById('resistors').innerHTML = "Valid resistor setups:"+resistors.join('\n');
 }
