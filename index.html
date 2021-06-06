@@ -14,10 +14,14 @@
             </div>
             <div class="inputs">
                 <input type="number" id="range-lower" name="range-lower" class="range-input" placeholder="Lower bound">
-                <input type="number" id="range-higher" name="range-higher" class="range-input" placeholder="Higher bound">
+                <input type="number" id="range-higher" name="range-higher" class="range-input" placeholder="Upper bound">
             </div>
             <div class="hint">(Bound input is in Ω, not kΩ)</div>
-            <button type="button" onclick="calculateResistance()" class="range-submit">Calculate</button>
+            <div class="option-row">
+                <button type="button" onclick="calculateResistance()" class="range-submit">Calculate</button>
+                <input type="checkbox" onclick="longDisplay()" id="long-display"> Display long
+            </div>
+            <div id="resistors"></div>
         </div>
         <script src="./scripts.js"></script>
     </body>

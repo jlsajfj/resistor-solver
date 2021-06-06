@@ -45,9 +45,25 @@ body {
     border-radius: 4px;
 }
 
+.option-row {
+    flex-direction: row;
+}
+
 .range-submit {
     font-family: 'Lucida Console';
     padding: 5px 10px;
-    width: 30%;
+    width: 20em;
     margin: 10px;
+}
+
+.resistors {
+    margin-top: 10px;
+}
+
+.resistor-row {
+    margin: 10px;
+}
+
+.hidden {
+    display: none;
 }
