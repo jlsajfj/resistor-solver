@@ -22,8 +22,26 @@
                 <input type="checkbox" onclick="longDisplay()" id="long-display"> Display long
             </div>
             <div id="resistors"></div>
-            <div class="footer"></div>
+            <div class="footer">
+                For IEEE citation:
+                <br />
+                J. Ma, <i>Resistor Solver</i>, June 6, 2021. Accessed on: <span id="date-fill"></span>. [Online]. Available: <span id="url-fill"></span>
+                <br />
+                &copy; Joseph Ma 2021
+            </div>
         </div>
+        <script>
+            const MonthNames = ["Jan", "Feb", "Mar", "Apr", "May", "June",
+                "July", "Aug", "Sep", "Oc", "Nov", "Dec"];
+            window.onload = () => {
+                var date =  new Date();
+                var year = date.getFullYear();
+                var month = MonthNames[date.getMonth()];
+                var day = date.getDate();
+                document.getElementById('date-fill').innerHTML = `${month} ${day}, ${year}`
+                document.getElementById('url-fill').innerHTML = window.location.href;
+            }
+        </script>
         <script src="./scripts.js"></script>
     </body>
 </html>
