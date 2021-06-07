@@ -113,13 +113,7 @@ function calculateResistance(){
         resistors.push(`<div class="resistor-row">${inSeries}${inParallel}</div>`)
     });
     if(!valid.length) {
-        if(onek || fivek || tenk && Math.abs(mid - res) <= range){
-            resistors.push(`<div class="resistor-row"><div class="series">In series:&nbsp;&nbsp;&nbsp;${onek}x 1kΩ<span class="optional${ShowLong?"":" hidden"}">&nbsp;Resistors</span>, `+
-            `${fivek}x 5.1kΩ<span class="optional${ShowLong?"":" hidden"}">&nbsp;Resistors</span>, `+
-            `and ${tenk}x 10kΩ<span class="optional${ShowLong?"":" hidden"}">&nbsp;Resistors</span>.</div></div>`)
-        } else {
-            resistors.push("<div class=\"resistor-row\">None</div>");
-        }
+        resistors.push("<div class=\"resistor-row\">None</div>");
     }
     document.getElementById('resistors').innerHTML = "Valid resistor setups:"+resistors.join('<hr>');
 }
