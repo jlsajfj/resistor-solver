@@ -17,17 +17,20 @@ function calculateResistance(){
     var count, i, j, k, testRes, dist, done = 0;
     const max = 50; // max resistors
     const valid = []
-    while(mid - res > 10000){
-        if(mid - res > 10000){
+    while(mid - res >= 10000){
+        if(mid - res >= 10000){
             res += 10000;
             tenk ++;
-        } else if(mid - res > 5100){
+        } else if(mid - res >= 5100){
             res += 5100;
             fivek ++;
         } else {
             res += 1000;
             onek ++;
         }
+    }
+    if(mid - res < range){
+        valid.push([0, 0, 0, onek, fivek, tenk])
     }
     for(count = 2; mid - res > range && count <= max && done < 3; count ++){
         for(i = count; i >= 0 && done < 3; i--){
@@ -36,7 +39,7 @@ function calculateResistance(){
                 testRes = 1/(i/1000+j/5100+k/10000)
                 dist = Math.abs(mid - res - testRes)
                 if(dist < range){
-                    valid.push([i, j, k])
+                    valid.push([i, j, k, onek, fivek, tenk])
                     done ++;
                 }
             }
@@ -44,14 +47,17 @@ function calculateResistance(){
     }
     done = 0;
     
-    while(mid - res > 5100){
-        if(mid - res > 5100){
+    while(mid - res >= 5100){
+        if(mid - res >= 5100){
             res += 5100;
             fivek ++;
         } else {
             res += 1000;
             onek ++;
         }
+    }
+    if(mid - res < range){
+        valid.push([0, 0, 0, onek, fivek, tenk])
     }
     for(count = 2; mid - res > range && count <= max && done < 3; count ++){
         for(i = count; i >= 0 && done < 3; i--){
@@ -60,7 +66,7 @@ function calculateResistance(){
                 testRes = 1/(i/1000+j/5100+k/10000)
                 dist = Math.abs(mid - res - testRes)
                 if(dist < range){
-                    valid.push([i, j, k])
+                    valid.push([i, j, k, onek, fivek, tenk])
                     done ++;
                 }
             }
@@ -68,10 +74,13 @@ function calculateResistance(){
     }
     done = 0;
     
-    while(mid - res > 1000){
+    while(mid - res >= 1000){
         res += 1000;
         onek ++;
     }
+    if(mid - res < range){
+        valid.push([0, 0, 0, onek, fivek, tenk])
+    }
     for(count = 2; mid - res > range && count <= max && done < 3; count ++){
         for(i = count; i >= 0 && done < 3; i--){
             for(j = count - i; j >= 0 && done < 3; j--){
@@ -79,7 +88,7 @@ function calculateResistance(){
                 testRes = 1/(i/1000+j/5100+k/10000)
                 dist = Math.abs(mid - res - testRes)
                 if(dist < range){
-                    valid.push([i, j, k])
+                    valid.push([i, j, k, onek, fivek, tenk])
                     done ++;
                 }
             }
@@ -87,12 +96,13 @@ function calculateResistance(){
     }
 
     const ShowLong = document.getElementById('long-display').checked;
-    const resistors = valid.map( set => {
+    const resistors = [];
+    valid.forEach( set => {
         var inSeries = "";
-        if(onek || fivek || tenk){
-            inSeries = `<div class="series">In series:&nbsp;&nbsp;&nbsp;${onek}x 1kΩ<span class="optional${ShowLong?"":" hidden"}">&nbsp;Resistors</span>, `+
-            `${fivek}x 5.1kΩ<span class="optional${ShowLong?"":" hidden"}">&nbsp;Resistors</span>, `+
-            `and ${tenk}x 10kΩ<span class="optional${ShowLong?"":" hidden"}">&nbsp;Resistors</span>.</div>`
+        if(set[3] || set[4] || set[5]){
+            inSeries = `<div class="series">In series:&nbsp;&nbsp;&nbsp;${set[3]}x 1kΩ<span class="optional${ShowLong?"":" hidden"}">&nbsp;Resistors</span>, `+
+            `${set[4]}x 5.1kΩ<span class="optional${ShowLong?"":" hidden"}">&nbsp;Resistors</span>, `+
+            `and ${set[5]}x 10kΩ<span class="optional${ShowLong?"":" hidden"}">&nbsp;Resistors</span>.</div>`
         }
         var inParallel = "";
         if(set[0] || set[1] || set[2]){
@@ -100,9 +110,13 @@ function calculateResistance(){
             `${set[1]}x 5.1kΩ<span class="optional${ShowLong?"":" hidden"}">&nbsp;Resistors</span>, `+
             `and ${set[2]}x 10kΩ<span class="optional${ShowLong?"":" hidden"}">&nbsp;Resistors</span>.</div>`
         }
-        return `<div class="resistor-row">${inSeries}${inParallel}</div>`
+        resistors.push(`<div class="resistor-row">${inSeries}${inParallel}</div>`)
+    });
+    if(!valid.length) {
+        resistors.push(`<div class="resistor-row"><div class="series">In series:&nbsp;&nbsp;&nbsp;${set[3]}x 1kΩ<span class="optional${ShowLong?"":" hidden"}">&nbsp;Resistors</span>, `+
+        `${set[4]}x 5.1kΩ<span class="optional${ShowLong?"":" hidden"}">&nbsp;Resistors</span>, `+
+        `and ${set[5]}x 10kΩ<span class="optional${ShowLong?"":" hidden"}">&nbsp;Resistors</span>.</div></div>`)
     }
-    );
     document.getElementById('resistors').innerHTML = "Valid resistor setups:"+resistors.join('\n');
 }
 
