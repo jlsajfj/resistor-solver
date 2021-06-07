@@ -15,7 +15,7 @@ function calculateResistance(){
     const range = (UpperBound - LowerBound) / 2;
     let res = 0, onek = 0, fivek = 0, tenk = 0; // fivek refers to 5.1k
     var count, i, j, k, testRes, dist, done = 0;
-    const max = 50; // max resistors
+    const max = 100; // max resistors
     const valid = []
     while(mid - res >= 10000){
         if(mid - res >= 10000){
