@@ -18,3 +18,9 @@ IEEE Citation:
 
 
 J. Ma, *Resistor Solver*, June 6, 2021. Accessed on: **TODAYS DATE HERE**. [Online]. Available: https://jlsajfj.github.io/resistor-solver/
+
+
+
+
+
+*It is known that duplicates appear. This will not be fixed*

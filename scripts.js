@@ -29,7 +29,7 @@ function calculateResistance(){
             onek ++;
         }
     }
-    if(mid - res < range){
+    if(Math.abs(mid - res) <= range){
         valid.push([0, 0, 0, onek, fivek, tenk])
     }
     for(count = 2; mid - res > range && count <= max && done < 3; count ++){
@@ -38,7 +38,7 @@ function calculateResistance(){
                 k = count - i - j;
                 testRes = 1/(i/1000+j/5100+k/10000)
                 dist = Math.abs(mid - res - testRes)
-                if(dist < range){
+                if(dist <= range){
                     valid.push([i, j, k, onek, fivek, tenk])
                     done ++;
                 }
@@ -56,7 +56,7 @@ function calculateResistance(){
             onek ++;
         }
     }
-    if(mid - res < range){
+    if(Math.abs(mid - res) <= range){
         valid.push([0, 0, 0, onek, fivek, tenk])
     }
     for(count = 2; mid - res > range && count <= max && done < 3; count ++){
@@ -65,7 +65,7 @@ function calculateResistance(){
                 k = count - i - j;
                 testRes = 1/(i/1000+j/5100+k/10000)
                 dist = Math.abs(mid - res - testRes)
-                if(dist < range){
+                if(dist <= range){
                     valid.push([i, j, k, onek, fivek, tenk])
                     done ++;
                 }
@@ -78,7 +78,7 @@ function calculateResistance(){
         res += 1000;
         onek ++;
     }
-    if(mid - res < range){
+    if(Math.abs(mid - res) <= range){
         valid.push([0, 0, 0, onek, fivek, tenk])
     }
     for(count = 2; mid - res > range && count <= max && done < 3; count ++){
@@ -87,7 +87,7 @@ function calculateResistance(){
                 k = count - i - j;
                 testRes = 1/(i/1000+j/5100+k/10000)
                 dist = Math.abs(mid - res - testRes)
-                if(dist < range){
+                if(dist <= range){
                     valid.push([i, j, k, onek, fivek, tenk])
                     done ++;
                 }
@@ -113,7 +113,7 @@ function calculateResistance(){
         resistors.push(`<div class="resistor-row">${inSeries}${inParallel}</div>`)
     });
     if(!valid.length) {
-        if(onek || fivek || tenk){
+        if(onek || fivek || tenk && Math.abs(mid - res) <= range){
             resistors.push(`<div class="resistor-row"><div class="series">In series:&nbsp;&nbsp;&nbsp;${onek}x 1kΩ<span class="optional${ShowLong?"":" hidden"}">&nbsp;Resistors</span>, `+
             `${fivek}x 5.1kΩ<span class="optional${ShowLong?"":" hidden"}">&nbsp;Resistors</span>, `+
             `and ${tenk}x 10kΩ<span class="optional${ShowLong?"":" hidden"}">&nbsp;Resistors</span>.</div></div>`)
