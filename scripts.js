@@ -113,11 +113,15 @@ function calculateResistance(){
         resistors.push(`<div class="resistor-row">${inSeries}${inParallel}</div>`)
     });
     if(!valid.length) {
-        resistors.push(`<div class="resistor-row"><div class="series">In series:&nbsp;&nbsp;&nbsp;${set[3]}x 1kΩ<span class="optional${ShowLong?"":" hidden"}">&nbsp;Resistors</span>, `+
-        `${set[4]}x 5.1kΩ<span class="optional${ShowLong?"":" hidden"}">&nbsp;Resistors</span>, `+
-        `and ${set[5]}x 10kΩ<span class="optional${ShowLong?"":" hidden"}">&nbsp;Resistors</span>.</div></div>`)
+        if(onek || fivek || tenk){
+            resistors.push(`<div class="resistor-row"><div class="series">In series:&nbsp;&nbsp;&nbsp;${onek}x 1kΩ<span class="optional${ShowLong?"":" hidden"}">&nbsp;Resistors</span>, `+
+            `${fivek}x 5.1kΩ<span class="optional${ShowLong?"":" hidden"}">&nbsp;Resistors</span>, `+
+            `and ${tenk}x 10kΩ<span class="optional${ShowLong?"":" hidden"}">&nbsp;Resistors</span>.</div></div>`)
+        } else {
+            resistors.push("<div class=\"resistor-row\">None</div>");
+        }
     }
-    document.getElementById('resistors').innerHTML = "Valid resistor setups:"+resistors.join('\n');
+    document.getElementById('resistors').innerHTML = "Valid resistor setups:"+resistors.join('<hr>');
 }
 
 function longDisplay(){
