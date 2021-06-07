@@ -88,12 +88,28 @@ body {
     margin-right: 0;
 }
 
+a:link {
+  color: #BBB;
+}
+
+a:visited {
+  color: #999;
+}
+
+a:hover {
+  color: #666;
+}
+
+a:active {
+  color: #DDD;
+}
+
+/* dark mode toggle
 .actual-footer {
     display: flex;
     flex-direction: row;
 }
 
-/* dark mode toggle
 .switch {
     position: relative;
     display: inline-block;
